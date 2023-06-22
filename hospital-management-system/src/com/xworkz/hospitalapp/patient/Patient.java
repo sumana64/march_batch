@@ -5,7 +5,11 @@ import com.xworkz.hospitalapp.constant.Gender;
 import lombok.*;
 
 @Data
+@ToString
 public class Patient {
+
+
+         int patientId;
 
          String patientName;
 
@@ -18,6 +22,15 @@ public class Patient {
          Document document;
 
          long phoneNo;
+
+         String wardNo;
+
+         String diseaseName;
+
+         String attender;
+
+         String location;
+
 
 
 
