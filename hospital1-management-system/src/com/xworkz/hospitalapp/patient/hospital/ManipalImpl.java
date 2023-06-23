@@ -1,5 +1,6 @@
 package com.xworkz.hospitalapp.patient.hospital;
 
+import com.xworkz.hospitalapp.patient.constant.Street;
 import com.xworkz.hospitalapp.patient.patient.Patient;
 
 public class ManipalImpl implements Hospital{
@@ -152,5 +153,18 @@ public class ManipalImpl implements Hospital{
         }
 
         return "attender is not found";
+    }
+
+    @Override
+    public String getStreetNameByPatientId(int id) {
+        System.out.println("streetNameByPatientId method");
+        for (Patient patient1:patient) {
+            if(patient1.getPatientId() == id){
+                System.out.println("street name is: " + patient1.getAddress().getCountry().getState().getCity().getArea().getStreet());
+
+            }
+        }
+
+        return null;
     }
 }

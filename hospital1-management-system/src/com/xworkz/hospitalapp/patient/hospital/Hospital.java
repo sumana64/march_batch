@@ -1,5 +1,6 @@
 package com.xworkz.hospitalapp.patient.hospital;
 
+import com.xworkz.hospitalapp.patient.constant.Street;
 import com.xworkz.hospitalapp.patient.patient.Patient;
 
 public interface Hospital {
@@ -20,9 +21,12 @@ public interface Hospital {
 
               boolean updatePatientAgeByPatientId(int existingId,int updatedPatientAge);
 
-                Patient getPatientById(int patientId);
+              Patient getPatientById(int patientId);
 
               String getPatientAttenderNameByPatientId(int patientId);
+
+              public String getStreetNameByPatientId(int id);
+
 
 
 
