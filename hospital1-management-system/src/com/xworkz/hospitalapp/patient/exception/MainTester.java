@@ -33,8 +33,7 @@ public class MainTester {
             e.printStackTrace();
         }
 
-        System.out.println("numberformat ends");2
-2
+        System.out.println("numberformat ends");
 
 
         System.out.println("array starts");
@@ -53,7 +52,9 @@ public class MainTester {
                 System.out.println(nm);
             }
         }catch(Exception e){
+
             e.printStackTrace();
+            System.out.println("Array size is fixed");
         }
 
         System.out.println("array ends");
