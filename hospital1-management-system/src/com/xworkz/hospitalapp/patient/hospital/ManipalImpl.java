@@ -1,6 +1,9 @@
 package com.xworkz.hospitalapp.patient.hospital;
 
-import com.xworkz.hospitalapp.patient.constant.Street;
+import com.xworkz.hospitalapp.patient.exception.AddressNotFoundException;
+import com.xworkz.hospitalapp.patient.exception.DiseaseNotFoundException;
+import com.xworkz.hospitalapp.patient.exception.IdNotFoundException;
+import com.xworkz.hospitalapp.patient.exception.WardNotFoundException;
 import com.xworkz.hospitalapp.patient.patient.Patient;
 
 public class ManipalImpl implements Hospital{
@@ -49,7 +52,8 @@ public class ManipalImpl implements Hospital{
                 pat = patient1;
                 System.out.println(patient1);
             }else{
-                System.out.println("patient address is not found");
+                AddressNotFoundException exception = new AddressNotFoundException(address);
+                throw exception;
             }
         }
         return pat;
@@ -57,14 +61,23 @@ public class ManipalImpl implements Hospital{
 
     @Override
     public String getPatientNameByWardNo(String wardNo) {
+        String patientName = null;
         System.out.println("getPatientNameByWardNo");
-        for (Patient patient:this.patient) {
-            if(patient.getWardNo().equals(wardNo)){
-                return patient.getPatientName();
+        for (Patient patient : this.patient) {
+            if (patient.getWardNo().equals(wardNo) && patient.getWardNo()!=null) {
+                patientName = patient.getPatientName();
+            
+            }else{
+                WardNotFoundException exception = new WardNotFoundException(wardNo);
+                throw exception;
             }
         }
-        return "patientname is not found";
+
+
+        return patientName;
     }
+
+
 
     @Override
     public String[] getPatientNameByDiseaseName(String diseaseName,int size){
@@ -73,6 +86,9 @@ public class ManipalImpl implements Hospital{
         for (Patient patient1:patient) {
             if(patient1.getDiseaseName().equals(diseaseName)){
                     patientName[index++] = patient1.getPatientName();
+            }else{
+                DiseaseNotFoundException exception = new DiseaseNotFoundException(diseaseName);
+                throw exception;
             }
         }
         return patientName;
@@ -86,7 +102,8 @@ public class ManipalImpl implements Hospital{
             if(patient1.getPatientName().equals(existingPatientName)){
                  patient1.setDiseaseName(updatedDisease);
                  isUpdated = true;
-                 
+            }else{
+
             }
         }
         return isUpdated;
@@ -133,7 +150,8 @@ public class ManipalImpl implements Hospital{
                  pat= patient1;
                  System.out.println(patient1);
              }else{
-                 System.out.println("id is not found");
+                 IdNotFoundException exception = new IdNotFoundException(patientId);
+                 throw exception;
              }
         }
         return pat;
