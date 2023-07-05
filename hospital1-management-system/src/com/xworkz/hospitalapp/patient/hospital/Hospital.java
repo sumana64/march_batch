@@ -1,6 +1,6 @@
 package com.xworkz.hospitalapp.patient.hospital;
 
-import com.xworkz.hospitalapp.patient.constant.Street;
+import com.xworkz.hospitalapp.patient.exception.DiseaseNotFoundException;
 import com.xworkz.hospitalapp.patient.patient.Patient;
 
 public interface Hospital {
@@ -13,7 +13,7 @@ public interface Hospital {
 
               String getPatientNameByWardNo(String wardNo);
 
-              String[] getPatientNameByDiseaseName(String diseaseName,int size);
+              String[] getPatientNameByDiseaseName(String diseaseName,int size) throws DiseaseNotFoundException;
 
               boolean updatePatientDiseaseByPatientName(String existingPatientName,String updatedDisease);
 

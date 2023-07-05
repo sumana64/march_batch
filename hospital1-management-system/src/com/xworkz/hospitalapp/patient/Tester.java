@@ -1,11 +1,14 @@
 package com.xworkz.hospitalapp.patient;
 
 import com.xworkz.hospitalapp.patient.constant.*;
+import com.xworkz.hospitalapp.patient.exception.AddressNotFoundException;
+import com.xworkz.hospitalapp.patient.exception.DiseaseNotFoundException;
+import com.xworkz.hospitalapp.patient.exception.IdNotFoundException;
+import com.xworkz.hospitalapp.patient.exception.WardNotFoundException;
 import com.xworkz.hospitalapp.patient.hospital.Hospital;
 import com.xworkz.hospitalapp.patient.hospital.ManipalImpl;
 import com.xworkz.hospitalapp.patient.patient.Patient;
 
-import java.awt.*;
 import java.util.Scanner;
 
 public class Tester {
@@ -23,7 +26,7 @@ public class Tester {
 
         for (int patientIndex = 0; patientIndex < size; patientIndex++) {
 
-            Address address = new Address();
+            /*Address address = new Address();
             Country country = new Country();
             State state = new State();
             City city = new City();
@@ -39,7 +42,7 @@ public class Tester {
             System.out.println("enter the country");
             country.setCoutry(sc.next());
             System.out.println("enter the street");
-            street.setStreet(sc.next());
+            street.setStreet(sc.next());*/
 
 
             Patient patient = new Patient();
@@ -61,13 +64,13 @@ public class Tester {
             patient.setDiseaseName(sc.next());
             System.out.println("enter the patientage:");
             patient.setAge(sc.nextInt());
-            patient.setAddress(address);
+            /*patient.setAddress(address);
 
             address.setCountry(country);
             country.setState(state);
             state.setCity(city);
             city.setArea(area);
-            area.setStreet(street);
+            area.setStreet(street);*/
 
 
             hos.createPatient(patient);
@@ -83,7 +86,7 @@ public class Tester {
             System.out.println("3.getPatientNameByWardNo");
             System.out.println("4.getPatientNameByDiseaseName");
             System.out.println("5.updatePatientDiseaseByPatientName");
-            System.out.println("6. updatePatientWardNoByPatientId");
+            System.out.println("6.updatePatientWardNoByPatientId");
             System.out.println("7.updatePatientAgeByPatientId");
             System.out.println("8.getPatientById");
             System.out.println("9.getPatientAttenderNameByPatientId");
@@ -100,15 +103,22 @@ public class Tester {
 
                 case 2: System.out.println("enter the address");
 
-                    hos.getPatientByAddress(sc.next());
+                    try {
+                        hos.getPatientByAddress(sc.next());
+                    }catch(AddressNotFoundException e){
+                        e.printStackTrace();
+                    }
 
                     break;
 
                 case 3: System.out.println("enter the wardno:");
 
-                    String str = hos.getPatientNameByWardNo(sc.next());
-
-                    System.out.println("the patientname is:" + str);
+                    try {
+                        String str = hos.getPatientNameByWardNo(sc.next());
+                        System.out.println("the patientname is:" + str);
+                    }catch(WardNotFoundException e){
+                        e.printStackTrace();
+                    }
 
                     break;
 
@@ -120,12 +130,18 @@ public class Tester {
 
                     int no = sc.nextInt();
 
-                    String[] str2 = hos.getPatientNameByDiseaseName(str1,no);
+                    try {
+                        String[] str2 = hos.getPatientNameByDiseaseName(str1, no);
 
-                    for (String s1 : str2) {
+                        for (String s1 : str2) {
 
-                        System.out.println(s1);
+                            System.out.println(s1);
+                        }
+                    }catch(DiseaseNotFoundException e){
+
+                        e.printStackTrace();
                     }
+
 
                     break;
 
@@ -168,7 +184,11 @@ public class Tester {
 
                 case 8: System.out.println("enter the patientId:");
 
-                    hos.getPatientById(sc.nextInt());
+                     try {
+                         hos.getPatientById(sc.nextInt());
+                     }catch(IdNotFoundException e){
+                         e.printStackTrace();
+                     }
 
                     break;
 
